@@ -12,9 +12,16 @@ import otpRoutes from "./routes/otpRoutes.js";
 dotenv.config();
 
 const app = express();
+app.use(
+  cors({
+    origin: (origin, cb) => cb(null, true),
+    credentials: true,
+    methods: "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+    allowedHeaders: "Content-Type, Authorization",
+  })
+);
 
 app.use(express.json());
-app.use(cors());
 
 // Auth routes
 app.use("/api/auth", authRoutes);
