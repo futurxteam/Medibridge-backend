@@ -353,3 +353,29 @@ export const bulkCreateJobs = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+export const getJobsPublic = async (req, res) => {
+  try {
+    const { search } = req.query;
+
+    // Base filter → only external or both
+    let filter = {
+      eligibility: { $in: ["EXTERNAL_ONLY", "BOTH"] }
+    };
+
+    // Add search ONLY on title
+    if (search) {
+      const regex = new RegExp(search, "i");
+      filter.title = regex;
+    }
+
+    const jobs = await Job.find(filter)
+      .sort({ createdAt: -1 })
+      .populate("postedBy", "name email");
+
+    return res.json(jobs);
+  } catch (err) {
+    console.error("Public jobs error:", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};

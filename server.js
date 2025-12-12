@@ -9,6 +9,7 @@ import authRoutes from "./routes/authRoutes.js";
 import studentRoutes from "./routes/studentRoutes.js";
 import facultyRoutes from "./routes/facultyRoutes.js";
 import otpRoutes from "./routes/otpRoutes.js";
+import publicapi from "./routes/publicRoutes.js"
 dotenv.config();
 
 const app = express();
@@ -30,6 +31,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/student", studentRoutes);  // /api/student/jobs
 app.use("/api/faculty", facultyRoutes);  // /api/faculty/jobs
 app.use("/api/otp", otpRoutes);
+app.use("/api/public",publicapi)
 const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI;
 mongoose
