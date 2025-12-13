@@ -236,7 +236,11 @@ export const deleteJob = async (req, res) => {
     // Delete all applications for this job
     await Application.deleteMany({ job: id });
 
-    res.json({ message: "Job deleted successfully" });
+   res.json({
+  success: true,
+  message: "Job deleted successfully"
+});
+
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error" });
