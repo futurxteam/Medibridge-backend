@@ -202,7 +202,7 @@ export const updateJob = async (req, res) => {
     const job = await Job.findById(id);
     if (!job) return res.status(404).json({ message: "Job not found or not yours" });
 
-    const allowedUpdates = ["title", "description", "eligibility", "recruiterEmail"];
+    const allowedUpdates = ["title", "description", "eligibility", "recruiterEmail", "phone"];
 
     Object.keys(updates).forEach((key) => {
       if (allowedUpdates.includes(key)) job[key] = updates[key];
